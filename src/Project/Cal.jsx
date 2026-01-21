@@ -1,4 +1,5 @@
 import { useState } from "react";
+// start
 
 export default function Cal() {
     // create kiti 2 feilds in ik state leke augi 
