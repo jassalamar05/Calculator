@@ -30,7 +30,7 @@ export default function Cal() {
         {/* Display */}
         <div className="bg-zinc-700 p-4 rounded-xl">
           <p className="text-zinc-300 text-sm">Input</p>
-          {/* ede ch || "0" -> add ta kita hai taki static space cover kr lwe and ik dam nal number show na hove */}
+          {/* ede ch || "0" -> add ta kita jai taki static space cover kr lwe and ik dam nal number show na hove */}
           <h2 className="text-2xl font-bold">{input || "0"}</h2>
 
           <p className="text-zinc-300 text-sm mt-2">Result</p>
