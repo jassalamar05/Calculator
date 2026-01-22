@@ -2,10 +2,17 @@ import { useState } from "react";
 // start
 
 export default function Cal() {
+  // history toggle button
+  const[isOpen,issetOpen]=useState(false)
+  const handleSubmit=()=>{
+    issetOpen(!isOpen)
+  }
     // create kiti 2 feilds in ik state leke augi 
     // duji state da result nu calcultae krugi 
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
+
+    const[history,setHistory]=useState([])
 
   // ahh previous state+  next state nu add kruga jo bhi hoya operation odo kruga 
   const addValue = (val) => {
@@ -22,11 +29,21 @@ export default function Cal() {
   const calculate = () => {
     const ans = eval(input);
     setResult(ans);
+    setHistory(prev=>[...prev,`${input}=${ans}`])
   };
 
+  const single=()=>{
+    setInput(prev=>(prev.slice(0,-1)))
+  }
+
+  const clear=()=>{
+    setHistory([])
+
+  }
+
   return (
-    <div className="h-screen flex items-center pb-30 bg-zinc-900 text-white">
-      <div className=" bg-zinc-800 p-3 rounded-2xl space-y-5 w-full mx-3 ">
+    <div className="flex items-center pb-30 bg-zinc-900 text-white">
+      <div className=" bg-zinc-800 p-3 rounded-2xl space-y-5 w-full mx-3 relative pt-4 mt-10">
 
         {/* Display */}
         <div className="bg-zinc-700 p-4 rounded-xl ">
@@ -86,9 +103,33 @@ export default function Cal() {
           >
             Clear
           </button>
+
+          <button className="col-span-2 bg-red-500 p-3 rounded-xl hover:bg-red-600 font-bold" onClick={single}>
+            C
+          </button>
+        </div>
+     
+              {/* // navbar type */}
+    <button onClick={handleSubmit} className="absolute top-0 right-0 bg-red-800 p-3 rounded-2xl font-bold">
+      History
+    </button>
+    {isOpen && (
+      <div className="fixed inset-0 bg-zinc-900"> 
+      <div className="flex bg-black text-red-600 mt-10 p-2 text-xs">History of Calculations
+      <button className="absolute top-0 right-0 bg-red-800 p-2 rounded-2xl font-bold text-black mt-10" onClick={handleSubmit}>Back</button>
+      <button className="bg-white p-2 absolute top-0 right-20 mt-10 rounded-2xl" onClick={clear}>Clear</button>
+    
+      </div>
+        <div className="">
+            {history.map((item,index)=>(
+                <div className=" bg-red-700 mt-2 "><span>{index}:</span> <span className="px-10">{item}</span></div>
+            ))}
         </div>
       </div>
+    )}
     </div>
+    </div>
+
   );
 }
 
